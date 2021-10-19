@@ -34,36 +34,34 @@
         <a href="../pages/address_book_form.html"><img class="form-head-image" src="../assets/images/cancelButton.jpeg"
             alt="logo"></a>
       </div>
-    </form>
-  </div>
-
-  <!-- UC 3 -->
-  <div class="form-constrains">
-    <div class="row-content">
-      <label for="name" class="label text">Full Name</label>
-      <br>
-      <input type="text" class="input" id="name" name="name" placeholder="Your name.." autocomplete="off" required>
-      <error-output class="name-error"></error-output>
-    </div>
-    <div class="row-content">
-      <label for="phoneNumber" class="label text">Phone Number</label>
-      <br>
-      <input type="tel" class="input" id="phoneNumber" name="phoneNumber" placeholder="Your phone number.." autocomplete="off" required>
-      <error-output class="tel-error"></error-output>
-    </div>
-    <div class="row-content">
-      <label for="address" class="label text">Address</label>
-      <br>
-      <textarea name="address" id="address" placeholder="Your address.." autocomplete="off" required></textarea>
-      <error-output class="address-error"></error-output>
-    </div>
-    <div class="row-content">
-      <div class="column-constrains">
-        <div class="column-content">
-          <label for="city" class="label text">City</label>
+      <!-- UC 3 -->
+      <div class="form-constrains">
+        <div class="row-content">
+          <label for="name" class="label text">Full Name</label>
           <br>
-          <select name="city" id="city" required>
-            <option selected disabled hidden value="Select City">Select City</option>
+          <input type="text" class="input" id="name" name="name" placeholder="Your name.." autocomplete="off" required>
+          <error-output class="name-error"></error-output>
+        </div>
+        <div class="row-content">
+          <label for="phoneNumber" class="label text">Phone Number</label>
+          <br>
+          <input type="tel" class="input" id="phoneNumber" name="phoneNumber" placeholder="Your phone number.."
+            autocomplete="off" required>
+          <error-output class="tel-error"></error-output>
+        </div>
+        <div class="row-content">
+          <label for="address" class="label text">Address</label>
+          <br>
+          <textarea name="address" id="address" placeholder="Your address.." autocomplete="off" required></textarea>
+          <error-output class="address-error"></error-output>
+        </div>
+        <div class="row-content">
+          <div class="column-constrains">
+            <div class="column-content">
+              <label for="city" class="label text">City</label>
+              <br>
+              <select name="city" id="city" required>
+                <option selected disabled hidden value="Select City">Select City</option>
                 <option value="Ahmedabad">Ahmedabad</option>
                 <option value="Bangalore">Bangalore</option>
                 <option value="Chennai">Chennai</option>
@@ -76,12 +74,12 @@
                 <option value="Pune">Pune</option>
                 <option value="Surat">Surat</option>
               </select>
-        </div>
-        <div class="column-content">
-          <label for="state" class="label text">State</label>
-          <br>
-          <select name="state" id="state">
-            <option selected disabled hidden value="Select State">Select State</option>
+            </div>
+            <div class="column-content">
+              <label for="state" class="label text">State</label>
+              <br>
+              <select name="state" id="state">
+                <option selected disabled hidden value="Select State">Select State</option>
                 <option value="Andhra Pradesh">Andhra Pradesh</option>
                 <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
                 <option value="Arunachal Pradesh">Arunachal Pradesh</option>
@@ -118,17 +116,24 @@
                 <option value="Uttar Pradesh">Uttar Pradesh</option>
                 <option value="Uttarakhand">Uttarakhand</option>
                 <option value="West Bengal">West Bengal</option>
-          </select>
+              </select>
+            </div>
+            <div class="column-content">
+              <label for="zip" class="label text">Zip code</label>
+              <br>
+              <input type="text" class="input zipcode" id="zip" name="zip" autocomplete="off" placeholder="Your zipcode.." required>
+              <error-output class="zip-error"></error-output>
+            </div>
+          </div>
         </div>
-        <div class="column-content">
-          <label for="zip" class="label text">Zip code</label>
-          <br>
-          <input type="text" class="input zipcode" id="zip" name="zip" autocomplete="off" placeholder="Your zipcode.." required>
-          <error-output class="zip-error"></error-output>
+        <div class="buttons-contact">
+          <button type="submit" class="button button-submit" id="submitButton">Add</button>
+          <button type="reset" class="button button-reset" id="resetButton">Reset</button>
         </div>
       </div>
-    </div>
+    </form>
   </div>
+
   <!-- UC 4 -->
   <script src="../js/address_book_form.js"></script>
   <script src="../js/contact_data.js"></script>
