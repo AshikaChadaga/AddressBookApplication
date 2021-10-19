@@ -1,2 +1,2 @@
 # AddressBookApplication
-Bridgelabz: Address Book Application using HTMl CSS and JavaScript
+Bridgelabz: Address Book Application using HTML CSS and JavaScript
