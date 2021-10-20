@@ -19,7 +19,7 @@ const validateName = () => {
       return;
     }
     try {
-      new Contact().name = name.value;
+      checkName(name.value);
       setTextValue(".name-error", "");
     } catch (error) {
       setTextValue(".name-error", error);
@@ -35,7 +35,7 @@ const validatePhoneNumber = () => {
       return;
     }
     try {
-      new Contact().phoneNumber = phoneNumber.value;
+      checkPhoneNumber(phoneNumber.value);
       setTextValue(".tel-error", "");
     } catch (error) {
       setTextValue(".tel-error", error);
@@ -51,7 +51,7 @@ const validateAddress = () => {
       return;
     }
     try {
-      new Contact().address = address.value;
+      checkAddress(address.value);
       setTextValue(".address-error", "");
     } catch (error) {
       setTextValue(".address-error", error);
@@ -67,7 +67,7 @@ const validateZipcode = () => {
       return;
     }
     try {
-      new Contact().zip = zip.value;
+      checkZip(zip.value);
       setTextValue(".zip-error", "");
     } catch (error) {
       setTextValue(".zip-error", error);
@@ -89,14 +89,14 @@ const save = () => {
 const createAndUpdateLocalStorage = () => {
   let contactList = JSON.parse(localStorage.getItem("ContactList"));
   if (contactList != undefined) {
-    let contactData = contactList.find(contact => contact._id == contactObj._id);
+    let contactData = contactList.find(contact => contact.id == contactObj.id);
     if (!contactData) {
       contactList.push(createContact());
     } else {
       const index = contactList
-                    .map(contact => contact._id)
-                    .indexOf(contactData._id);
-      contactList.splice(index, 1, createContact(contactData._id));
+                    .map(contact => contact.id)
+                    .indexOf(contactData.id);
+      contactList.splice(index, 1, createContact(contactData.id));
     }
   } else {
     contactList = [createContact()];
@@ -107,10 +107,10 @@ const createAndUpdateLocalStorage = () => {
 const createContact = (id) => {
   let contact = new Contact();
   if (!id) {
-    contact._id = generateId();
+    contact.id = generateId();
   }
   else {
-    contact._id = id;
+    contact.id = id;
   }
   setContactData(contact);
   return contact;
