@@ -1,4 +1,7 @@
+let contactList;
+
 window.addEventListener("DOMContentLoaded", (event) => {
+  contactList = getContactFromLocalStorage();
   document.querySelector(".contact-count").textContent = contactList.length;
   createInnerHtml();
 });
@@ -34,23 +37,6 @@ const createInnerHtml = () => {
   document.querySelector("#table-display").innerHTML = innerHtml;
 };
 
-let contactList = [
-  {
-    _id: 1,
-    _name: "Killua",
-    _phoneNumber: "91 9874563210",
-    _address: "Kukoru Mountain",
-    _city: "Bangalore",
-    _state: "Karnataka",
-    _zip: "465768",
-  },
-  {
-    _id: 2,
-    _name: "Gon Freecs",
-    _phoneNumber: "91 9756678676",
-    _address: "Whale Island",
-    _city: "Chennai",
-    _state: "Tamil Nadu",
-    _zip: "457684",
-  },
-];
+const getContactFromLocalStorage = () =>{
+  return localStorage.getItem('ContactList') ? JSON.parse(localStorage.getItem('ContactList')) : []
+}
