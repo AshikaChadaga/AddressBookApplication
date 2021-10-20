@@ -1,8 +1,12 @@
+let isUpdate = false;
+
 window.addEventListener("DOMContentLoaded", (event) => {
   validateName();
   validatePhoneNumber();
   validateAddress();
   validateZipcode();
+  checkForUpdate();
+  localStorage.removeItem('contactEdit');
 });
 
 const validateName = () => {
@@ -152,6 +156,25 @@ const resetForm = () => {
   setTextValue(".address-error", "");
   setTextValue(".zip-error", "");
 };
+
+const checkForUpdate = () => {
+  const contactJson = localStorage.getItem('contactEdit');
+  isUpdate = contactJson ? true : false;
+  if(!isUpdate){
+    return;
+  }
+  contactObj = JSON.parse(contactJson);
+  setForm();
+}
+
+function setForm() {
+  setValue("#name",contactObj._name);
+  setValue("#phoneNumber", contactObj._phoneNumber);
+  setValue("#address", contactObj._address);
+  setValue("#city", contactObj._city);
+  setValue("#state", contactObj._state);
+  setValue("#zip", contactObj._zip);
+}
 
 const setValue = (id, value) => {
   const element = document.querySelector(id);
