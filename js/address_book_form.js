@@ -1,10 +1,12 @@
 let isUpdate = false;
+let contactObj = {};
 
 window.addEventListener("DOMContentLoaded", (event) => {
   validateName();
   validatePhoneNumber();
   validateAddress();
   validateZipcode();
+
   checkForUpdate();
   localStorage.removeItem('contactEdit');
 });
@@ -75,28 +77,46 @@ const validateZipcode = () => {
 
 const save = () => {
   try {
-    let contact = createContact();
-    createAndUpdateStorage(contact);
+    setContactObject();
+    createAndUpdateLocalStorage();
+    resetForm();
+    window.location.replace(site_properties.home_page);
   } catch (error) {
     alert(error);
   }
 };
 
-const createAndUpdateStorage = (contact) => {
+const createAndUpdateLocalStorage = () => {
   let contactList = JSON.parse(localStorage.getItem("ContactList"));
   if (contactList != undefined) {
-    contactList.push(contact);
+    let contactData = contactList.find(contact => contact._id == contactObj._id);
+    if (!contactData) {
+      contactList.push(createContact());
+    } else {
+      const index = contactList
+                    .map(contact => contact._id)
+                    .indexOf(contactData._id);
+      contactList.splice(index, 1, createContact(contactData._id));
+    }
   } else {
-    contactList = [contact];
+    contactList = [createContact()];
   }
-  alert(contact.toString());
-  alert("Contact Added Sucessfully");
   localStorage.setItem("ContactList", JSON.stringify(contactList));
-}
+};
 
-const createContact = () => {
+const createContact = (id) => {
   let contact = new Contact();
-  contact.id = new Date().getTime();
+  if (!id) {
+    contact._id = generateId();
+  }
+  else {
+    contact._id = id;
+  }
+  setContactData(contact);
+  return contact;
+};
+
+const setContactData = (contact) => {
 
   try {
     contact.name = getInputValueById("#name");
@@ -140,9 +160,45 @@ const createContact = () => {
     throw error;
   }
 
-  alert(contact.toString());
+  console.log(contact.toString());
   return contact;
 };
+
+
+const setContactObject = () => {
+  try {
+    contactObj._name = getInputValueById("#name");
+  } catch (error) {
+    setTextValue(".name-error", error);
+    throw error;
+  }
+
+  try {
+    contactObj._phoneNumber = getInputValueById("#phoneNumber");
+  } catch (error) {
+    setTextValue(".tel-error", error);
+    throw error;
+  }
+
+  contactObj._address = getInputValueById("#address");
+  contactObj._city = getInputValueById("#city");
+  contactObj._state = getInputValueById("#state");
+
+  try {
+    contactObj._zip = getInputValueById("#zip");
+  } catch (error) {
+    setTextValue(".zip-error", error);
+    throw error;
+  }
+};
+
+const generateId = () => {
+  let contactId = localStorage.getItem("ContactID");
+  contactId = !contactId ? 1 : (parseInt(contactId) + 1).toString();
+  localStorage.setItem("ContactID", contactId);
+  return contactId;
+};
+
 
 const resetForm = () => {
   setValue("#name", "");
@@ -160,21 +216,21 @@ const resetForm = () => {
 const checkForUpdate = () => {
   const contactJson = localStorage.getItem('contactEdit');
   isUpdate = contactJson ? true : false;
-  if(!isUpdate){
+  if (!isUpdate) {
     return;
   }
   contactObj = JSON.parse(contactJson);
   setForm();
-}
+};
 
-function setForm() {
-  setValue("#name",contactObj._name);
+const setForm = () => {
+  setValue("#name", contactObj._name);
   setValue("#phoneNumber", contactObj._phoneNumber);
   setValue("#address", contactObj._address);
   setValue("#city", contactObj._city);
   setValue("#state", contactObj._state);
   setValue("#zip", contactObj._zip);
-}
+};
 
 const setValue = (id, value) => {
   const element = document.querySelector(id);
