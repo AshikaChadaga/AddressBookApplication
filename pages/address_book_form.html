@@ -28,7 +28,7 @@
 
   <!-- UC 2 -->
   <div class="form-content">
-    <form action="#" class="form" onreset="resetForm()" onsubmit="save();return false">
+    <form action="#" class="form" onreset="event.preventDefault(); resetForm()" onsubmit="save(event)">
       <div class="form-head">
         <div class="form-head-text">Person Address Form</div>
         <a href="../pages/address_book_home.html"><img class="form-head-image" src="../assets/images/cancelButton.png"
@@ -128,7 +128,7 @@
         </div>
         <div class="buttons-contact">
           <button type="submit" class="button button-submit" id="submitButton">Add</button>
-          <button type="reset" class="button button-reset" id="resetButton" onclick="resetForm()">Reset</button>
+          <button type="reset" class="button button-reset" id="resetButton" onreset="event.preventDefault(); resetForm()">Reset</button>
         </div>
       </div>
     </form>
