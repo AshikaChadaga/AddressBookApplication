@@ -1,4 +1,4 @@
-/* UC 1 */
+/* UC 10 */
 
 * {
   box-sizing: border-box;
@@ -7,6 +7,7 @@
 body {
   margin: 0;
   height: 100%;
+  background-color: #f7f7f7;
 }
 
 .header {
@@ -30,8 +31,8 @@ body {
 }
 
 .addressBook-text {
-  text-align: left;
   font: normal normal bold 22px/25px Montserrat;
+  text-align: left;
   letter-spacing: 0px;
   text-transform: uppercase;
   opacity: 1;
