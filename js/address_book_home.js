@@ -34,8 +34,8 @@ const createInnerHtml = () => {
         <td>${contact._zip}</td>
         <td>${contact._phoneNumber}</td>
         <td>
-            <img src="../assets/icons/delete.svg" alt="delete" id="${contact._id}" onclick="remove(this)">
-            <img src="../assets/icons/edit.svg" alt="update" id="${contact._id}" onclick="update(this)">
+            <img src="../assets/icons/delete.svg" alt="delete" id="${contact.id}" onclick="remove(this)">
+            <img src="../assets/icons/edit.svg" alt="update" id="${contact.id}" onclick="update(this)">
         </td>
         </tr>`;
   }
@@ -43,11 +43,11 @@ const createInnerHtml = () => {
 };
 
 const remove = (node) => {
-  let removeContact = contactList.find(contact => contact._id == node.id);
+  let removeContact = contactList.find(contact => contact.id == node.id);
   if (!removeContact) {
     return;
   }
-  const index = contactList.map(contact => contact._id).indexOf(removeContact._id);
+  const index = contactList.map(contact => contact.id).indexOf(removeContact.id);
   contactList.splice(index, 1);
   localStorage.setItem("ContactList", JSON.stringify(contactList));
   document.querySelector(".contact-count").textContent = contactList.length;
@@ -56,7 +56,7 @@ const remove = (node) => {
 }
 
 const update = (node) => {
-  let contactEdit = contactList.find(editContact => editContact._id == node.id);
+  let contactEdit = contactList.find(editContact => editContact.id == node.id);
   if (!contactEdit) {
     return;
   }
